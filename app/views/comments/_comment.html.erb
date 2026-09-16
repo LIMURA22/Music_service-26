@@ -1,0 +1,9 @@
+
+
+<div class="comment" id="<%= dom_id comment %>">
+  <p><%= comment.body %></p>
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <span class="post-meta"><%= comment.created_at.strftime("%d.%m.%Y %H:%M") %></span>
+    <%= button_to "Удалить", [comment.post, comment], method: :delete, class: "btn btn-danger", style: "padding: 4px 12px; font-size: 13px;", data: { confirm: "Удалить комментарий?" } %>
+  </div>
+</div>

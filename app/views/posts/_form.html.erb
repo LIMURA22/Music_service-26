@@ -1,0 +1,26 @@
+
+
+<%= form_with(model: post) do |form| %>
+  <% if post.errors.any? %>
+    <div style="color: red; margin-bottom: 20px;">
+      <h2><%= pluralize(post.errors.count, "ошибка") %>:</h2>
+      <ul>
+        <% post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :title, "Заголовок" %>
+    <%= form.text_field :title, placeholder: "Например: Как играть флажолет" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description, "Описание" %>
+    <%= form.text_area :description, placeholder: "Расскажи подробнее..." %>
+  </div>
+
+  <%= form.submit "Сохранить", class: "btn btn-primary" %>
+<% end %>

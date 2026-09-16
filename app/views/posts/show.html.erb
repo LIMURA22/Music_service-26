@@ -1,0 +1,36 @@
+
+<article class="post-show">
+  <h1><%= @post.title %></h1>
+  <div class="post-meta">
+    Опубликовано <%= @post.created_at.strftime("%d.%m.%Y") %>
+  </div>
+  <p class="description"><%= @post.description %></p>
+
+  <div class="post-actions">
+    <%= link_to "Редактировать", edit_post_path(@post), class: "btn btn-secondary" %>
+    <%= link_to "Все посты", posts_path, class: "btn btn-primary" %>
+    <%= button_to "Удалить", @post, method: :delete, class: "btn btn-danger", data: { confirm: "Точно удалить?" } %>
+  </div>
+</article>
+
+<section class="comments-section">
+  <h2>Комментарии (<%= @post.comments.count %>)</h2>
+  
+  <div id="comments">
+    <% if @post.comments.any? %>
+      <%= render @post.comments %>
+    <% else %>
+      <p style="color: #999;">Пока нет комментариев. Будь первым!</p>
+    <% end %>
+  </div>
+
+  <div class="comment-form">
+    <h3 style="margin-bottom: 16px;">Добавить комментарий:</h3>
+    <%= form_with(model: [@post, @comment]) do |form| %>
+      <div class="form-group">
+        <%= form.text_area :body, placeholder: "Напиши свой комментарий..." %>
+      </div>
+      <%= form.submit "Отправить", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</section>

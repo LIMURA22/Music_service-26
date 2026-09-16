@@ -1,0 +1,294 @@
+/* Сброс стилей */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f5f3ef;
+    color: #1a1a1a;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Шапка */
+.main-header {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 20px 0;
+    margin-bottom: 40px;
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.main-nav {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.main-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    transition: opacity 0.2s;
+}
+
+.main-nav a:hover {
+    opacity: 0.7;
+}
+
+.btn-new {
+    background: #e8b44a;
+    color: #1a1a1a !important;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+/* Уведомления */
+.notice,
+.alert {
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.notice {
+    background: #d4edda;
+    color: #155724;
+}
+
+.alert {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* Сетка постов */
+#posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+/* Карточка поста */
+.post-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    text-decoration: none;
+    color: #1a1a1a;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: block;
+}
+
+.post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+.post-card h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: #1a1a1a;
+}
+
+.post-card p {
+    color: #666;
+    font-size: 15px;
+    margin-bottom: 16px;
+}
+
+.post-card .post-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.post-meta {
+    font-size: 13px;
+    color: #999;
+}
+
+/* Страница поста */
+.post-show {
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px;
+    margin-bottom: 32px;
+}
+
+.post-show h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.post-show .post-image {
+    width: 100%;
+    border-radius: 12px;
+    margin: 24px 0;
+}
+
+.post-show .description {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 24px;
+}
+
+.post-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #eee;
+}
+
+/* Кнопки */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-primary {
+    background: #1a1a1a;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #333;
+}
+
+.btn-secondary {
+    background: #e8b44a;
+    color: #1a1a1a;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: #fff;
+}
+
+/* Комментарии */
+.comments-section {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 32px;
+}
+
+.comments-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.comment {
+    padding: 16px;
+    border-bottom: 1px solid #eee;
+}
+
+.comment:last-child {
+    border-bottom: none;
+}
+
+.comment p {
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.comment-form {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #eee;
+}
+
+.comment-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 15px;
+    margin-bottom: 12px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Формы */
+.form-container {
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.form-container h1 {
+    font-size: 32px;
+    margin-bottom: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+/* Подвал */
+.main-footer {
+    background: #1a1a1a;
+    color: #999;
+    padding: 32px 0;
+    text-align: center;
+    margin-top: 60px;
+    font-size: 14px;
+}

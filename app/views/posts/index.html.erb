@@ -1,0 +1,14 @@
+
+<h1 style="margin-bottom: 32px;">Все посты</h1>
+
+<div id="posts">
+  <% @posts.each do |post| %>
+    <%= link_to post, class: 'post-card' do %>
+      <h2><%= post.title %></h2>
+      <p><%= truncate(post.description, length: 120) %></p>
+      <div class="post-meta">
+        <%= post.created_at.strftime("%d.%m.%Y") %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
