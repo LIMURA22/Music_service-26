@@ -1,0 +1,63 @@
+<div class="container" style="padding: 32px 0;">
+  <h1>Модерация контента</h1>
+  <p style="color: #666; margin-bottom: 32px;">
+    Пользователи предлагают посты — ты решаешь, что публиковать.
+  </p>
+
+  <section style="margin-bottom: 48px;">
+    <h2>На модерации (<%= @pending_posts.count %>)</h2>
+    <% if @pending_posts.any? %>
+      <% @pending_posts.each do |post| %>
+        <div class="post-card" style="margin-bottom: 16px;">
+          <h3><%= post.title %></h3>
+          <p><%= truncate(post.description, length: 200) %></p>
+          <p class="post-meta">
+            Автор: <%= post.user&.email || "Аноним" %> · <%= post.created_at.strftime("%d.%m.%Y %H:%M") %>
+          </p>
+          <div style="display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;">
+            <%= button_to "Одобрить", approve_admin_post_path(post), method: :patch, class: "btn btn-primary" %>
+            <%= button_to "Отклонить", reject_admin_post_path(post), method: :patch, class: "btn btn-danger" %>
+            <%= link_to "Открыть", post, class: "btn btn-secondary" %>
+            <%= link_to "Редактировать", edit_post_path(post), class: "btn btn-secondary" %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p style="color: #999;">Нет постов на модерации.</p>
+    <% end %>
+  </section>
+
+  <section style="margin-bottom: 48px;">
+    <h2>Опубликованные (<%= @approved_posts.count %>)</h2>
+    <% if @approved_posts.any? %>
+      <% @approved_posts.each do |post| %>
+        <div style="padding: 12px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
+          <div>
+            <%= link_to post.title, post, style: "color: #1a1a1a; text-decoration: none; font-weight: 600;" %>
+            <span class="post-meta"> · <%= post.user&.email || "Аноним" %></span>
+          </div>
+          <%= button_to "Отклонить", reject_admin_post_path(post), method: :patch, class: "btn btn-danger", style: "padding: 6px 12px; font-size: 13px;" %>
+        </div>
+      <% end %>
+    <% else %>
+      <p style="color: #999;">Нет опубликованных постов.</p>
+    <% end %>
+  </section>
+
+  <section>
+    <h2>Отклонённые (<%= @rejected_posts.count %>)</h2>
+    <% if @rejected_posts.any? %>
+      <% @rejected_posts.each do |post| %>
+        <div style="padding: 12px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
+          <div>
+            <%= link_to post.title, post, style: "color: #999; text-decoration: none;" %>
+            <span class="post-meta"> · <%= post.user&.email || "Аноним" %></span>
+          </div>
+          <%= button_to "Восстановить", approve_admin_post_path(post), method: :patch, class: "btn btn-primary", style: "padding: 6px 12px; font-size: 13px;" %>
+        </div>
+      <% end %>
+    <% else %>
+      <p style="color: #999;">Нет отклонённых постов.</p>
+    <% end %>
+  </section>
+</div>

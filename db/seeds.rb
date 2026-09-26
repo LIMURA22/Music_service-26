@@ -1,23 +1,75 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
+# db/seeds.rb
 #
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-Post.create([
-  { title: "Как играть флажолет на электрогитаре", description: "Разбираю, почему флажолет может не звучать, и показываю 5 упражнений для тренировки. Подробно объясняю, как ставить палец, как держать медиатор и какие настройки звука помогут." },
-  { title: "Сведение трека для новичков", description: "Что такое эквалайзер, компрессор и ревербератор? Простыми словами объясняю, как свести свой первый трек, чтобы он звучал профессионально." },
-  { title: "Кварто-квинтовый круг: полный разбор", description: "Как читать кварто-квинтовый круг, зачем он нужен и как с его помощью строить аккорды и модуляции. Примеры для гитаристов и пианистов." },
-  { title: "Как записать звук на улице и не испортить ветром", description: "Делюсь лайфхаками: какой микрофон выбрать, как сделать ветрозащиту своими руками, как обрабатывать запись, чтобы убрать шум." },
-  { title: "Выпуск трека на Яндекс.Музыке: пошаговый гайд", description: "Как загрузить трек через дистрибьютора, какие документы нужны, сколько это стоит и как получить выплаты." },
-  { title: "10 книг, которые стоит прочитать музыканту", description: "Подборка книг по теории музыки, психологии творчества и звукорежиссуре. От классики до современности." },
-  { title: "Как использовать ИИ в работе с музыкой", description: "Обзор инструментов для генерации идей, мастеринга и создания обложек. Плюсы, минусы и этические вопросы." },
-  { title: "Настройка Reaper для записи гитары", description: "Как подключить аудиоинтерфейс, настроить буфер, выбрать плагины и записать первый дубль без задержек." },
-  { title: "Вокальные техники: как петь без напряжения", description: "Разбор дыхания, опоры и резонаторов. Упражнения для развития голоса и снятия зажимов." },
-  { title: "Как сделать первый трек в Ableton", description: "От создания проекта до экспорта. Разбираю интерфейс, работу с MIDI, сэмплами и эффектами." },
-  { title: "Почему не получается флажолет: 5 причин", description: "Разбираю типичные ошибки: недостаточное усилие, неправильный угол медиатора, грязные струны, плохая настройка и недостаток практики." },
-  { title: "Как читать табы: полный разбор обозначений", description: "Что означают цифры, линии, ромбики и другие символы в табах. Примеры для гитары." }
-])
+# Профессиональный скрипт наполнения базы данных.
+# Структура: seed → reset_db → create_users → create_posts → create_comments.
+# Каждый метод решает одну задачу. Это позволяет легко расширять и переиспользовать код.
+
+@raw_text = "Медиасервис для музыкантов — платформа, где гитаристы, пианисты, вокалисты и продюсеры делятся теорией музыки, лайфхаками, разборами приёмов, гайдами по DAW и получают обратную связь по своим трекам."
+@words = @raw_text.downcase.gsub(/[—.—,«»:()]/, '').gsub(/  /, ' ').split(' ')
+
+def seed
+  reset_db
+  create_users(3)
+  create_posts(12)
+  create_comments(2..5)
+end
+
+def reset_db
+  Rake::Task['db:drop'].invoke
+  Rake::Task['db:create'].invoke
+  Rake::Task['db:migrate'].invoke
+end
+
+def create_sentence
+  sentence_words = []
+
+  (10..20).to_a.sample.times do
+    sentence_words << @words.sample
+  end
+
+  sentence_words.join(' ').capitalize + '.'
+end
+
+def create_users(quantity)
+  quantity.times do |i|
+    user = User.create(
+      email: "user#{i + 1}@music-service.com",
+      password: "Password123",
+      password_confirmation: "Password123",
+      admin: i.zero?
+    )
+    puts "User with id #{user.id} just created (admin: #{user.admin})"
+  end
+end
+
+def upload_random_image
+  uploader = PostImageUploader.new(Post.new, :post_image)
+  uploader.cache!(File.open(Dir.glob(File.join(Rails.root, 'public/autoupload/posts', '*')).sample))
+  uploader
+end
+
+def create_posts(quantity)
+  authors = User.where(admin: false).to_a
+
+  quantity.times do
+    post = Post.create(
+      title: create_sentence,
+      description: create_sentence,
+      user_id: authors.sample.id,
+      status: 'approved',
+      post_image: upload_random_image
+    )
+    puts "Post with id #{post.id} just created by user #{post.user_id}"
+  end
+end
+
+def create_comments(quantity)
+  Post.all.each do |post|
+    quantity.to_a.sample.times do
+      comment = Comment.create(post_id: post.id, body: create_sentence)
+      puts "Comment with id #{comment.id} for post with id #{comment.post.id} just created"
+    end
+  end
+end
+
+seed

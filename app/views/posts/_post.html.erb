@@ -1,4 +1,7 @@
 <div class="post-card">
+  <% if post.post_image.present? %>
+    <%= image_tag post.post_image.url, class: "post-image" %>
+  <% end %>
   <h2><%= post.title %></h2>
   <p><%= truncate(post.description, length: 120) %></p>
   <div class="post-meta">

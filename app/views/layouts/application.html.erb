@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Music Service</title>
+    <title>Melotoria</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -12,18 +12,22 @@
   <body>
     <header class="main-header">
       <div class="container">
-        <h1 class="logo"><%= link_to "ЛадStar", root_path %></h1>
+        <h1 class="logo"><%= link_to "Melotoria", root_path %></h1>
         <nav class="main-nav">
-          <% if user_signed_in? %>
-             <span style="color: #999; font-size: 14px;">Привет, <%= current_user.email %></span>
-             <%= link_to "Выйти", destroy_user_session_path, data: { turbo_method: :delete } %>
-          <% else %>
-             <%= link_to "Войти", new_user_session_path %>
-             <%= link_to "Регистрация", new_user_registration_path %>
-          <% end %>
           <%= link_to "Посты", posts_path %>
           <%= link_to "О проекте", "#" %>
-          <%= link_to "Новый пост", new_post_path, class: "btn-new" %>
+          <% if user_signed_in? %>
+            <% if current_user.admin? %>
+              <%= link_to "Модерация", admin_posts_path %>
+            <% end %>
+            <%= link_to "Мои посты", my_posts_path %>
+            <%= link_to "Предложить пост", new_post_path, class: "btn-new" %>
+            <span style="color: #999; font-size: 14px;">Привет, <%= current_user.email %></span>
+            <%= link_to "Выйти", destroy_user_session_path, data: { turbo_method: :delete } %>
+          <% else %>
+            <%= link_to "Войти", new_user_session_path %>
+            <%= link_to "Регистрация", new_user_registration_path %>
+          <% end %>
         </nav>
       </div>
     </header>
@@ -40,7 +44,7 @@
 
     <footer class="main-footer">
       <div class="container">
-        <p>© 2026 ЛадStar — медиасервис для музыкантов</p>
+        <p>© 2026 Melotoria — медиасервис для музыкантов</p>
       </div>
     </footer>
   </body>

@@ -7,7 +7,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: #f5f3ef;
+    background: #eeeeff;
     color: #1a1a1a;
     line-height: 1.6;
 }
@@ -58,8 +58,8 @@ body {
 }
 
 .btn-new {
-    background: #e8b44a;
-    color: #1a1a1a !important;
+    background: #964ae8;
+    color: #ffffff !important;
     padding: 8px 20px;
     border-radius: 8px;
     font-weight: 600;
@@ -189,12 +189,12 @@ body {
 }
 
 .btn-secondary {
-    background: #e8b44a;
-    color: #1a1a1a;
+    background: #6f4ae8;
+    color: #ffffff;
 }
 
 .btn-danger {
-    background: #dc3545;
+    background: #ff3f53;
     color: #fff;
 }
 

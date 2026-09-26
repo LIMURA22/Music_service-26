@@ -1,21 +1,38 @@
+<% if @post.pending? %>
+  <div style="background: #fff3cd; color: #856404; padding: 12px 20px; border-radius: 8px; margin-bottom: 20px;">
+    Этот пост на модерации. Его видишь только ты и админ.
+  </div>
+<% elsif @post.rejected? %>
+  <div style="background: #f8d7da; color: #721c24; padding: 12px 20px; border-radius: 8px; margin-bottom: 20px;">
+    Этот пост отклонён администратором.
+  </div>
+<% end %>
 
 <article class="post-show">
   <h1><%= @post.title %></h1>
+
+  <% if @post.post_image.present? %>
+    <%= image_tag @post.post_image.url, class: "post-image" %>
+  <% end %>
+
   <div class="post-meta">
     Опубликовано <%= @post.created_at.strftime("%d.%m.%Y") %>
   </div>
+
   <p class="description"><%= @post.description %></p>
 
   <div class="post-actions">
-    <%= link_to "Редактировать", edit_post_path(@post), class: "btn btn-secondary" %>
+    <% if user_signed_in? && current_user.admin? %>
+      <%= link_to "Редактировать", edit_post_path(@post), class: "btn btn-secondary" %>
+      <%= button_to "Удалить", @post, method: :delete, class: "btn btn-danger", data: { confirm: "Точно удалить?" } %>
+    <% end %>
     <%= link_to "Все посты", posts_path, class: "btn btn-primary" %>
-    <%= button_to "Удалить", @post, method: :delete, class: "btn btn-danger", data: { confirm: "Точно удалить?" } %>
   </div>
 </article>
 
 <section class="comments-section">
   <h2>Комментарии (<%= @post.comments.count %>)</h2>
-  
+
   <div id="comments">
     <% if @post.comments.any? %>
       <%= render @post.comments %>
