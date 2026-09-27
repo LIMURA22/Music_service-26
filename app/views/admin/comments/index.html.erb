@@ -1,0 +1,39 @@
+<div class="container" style="padding: 32px 0;">
+  <h1>Управление комментариями</h1>
+
+  <section style="margin-bottom: 48px;">
+    <h2>Активные (<%= @active_comments.count %>)</h2>
+    <% if @active_comments.any? %>
+      <% @active_comments.each do |comment| %>
+        <div class="post-card" style="margin-bottom: 12px;">
+          <p><%= comment.body %></p>
+          <p class="post-meta">
+            К посту: <%= link_to comment.post.title.truncate(50), comment.post %> ·
+            <%= comment.created_at.strftime("%d.%m.%Y %H:%M") %>
+          </p>
+          <%= button_to "Удалить", admin_comment_path(comment), method: :delete, class: "btn btn-danger", style: "margin-top: 8px; padding: 6px 12px; font-size: 13px;", data: { turbo_confirm: "Переместить в корзину?" } %>
+        </div>
+      <% end %>
+    <% else %>
+      <p style="color: #999;">Активных комментариев нет.</p>
+    <% end %>
+  </section>
+
+  <section>
+    <h2>Корзина (<%= @deleted_comments.count %>)</h2>
+    <% if @deleted_comments.any? %>
+      <% @deleted_comments.each do |comment| %>
+        <div class="post-card" style="margin-bottom: 12px; opacity: 0.6;">
+          <p><%= comment.body %></p>
+          <p class="post-meta">
+            К посту: <%= link_to comment.post.title.truncate(50), comment.post %> ·
+            Удалён: <%= comment.deleted_at.strftime("%d.%m.%Y %H:%M") %>
+          </p>
+          <%= button_to "Восстановить", restore_admin_comment_path(comment), method: :patch, class: "btn btn-primary", style: "margin-top: 8px; padding: 6px 12px; font-size: 13px;" %>
+        </div>
+      <% end %>
+    <% else %>
+      <p style="color: #999;">Корзина пуста.</p>
+    <% end %>
+  </section>
+</div>

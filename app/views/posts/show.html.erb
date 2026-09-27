@@ -11,20 +11,32 @@
 <article class="post-show">
   <h1><%= @post.title %></h1>
 
+    <div class="post-meta" style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+    <% if @post.user&.avatar.present? %>
+      <%= image_tag @post.user.avatar.url, style: "width: 40px; height: 40px; border-radius: 50%; object-fit: cover;" %>
+    <% else %>
+      <div style="width: 40px; height: 40px; border-radius: 50%; background: #e8b44a; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #1a1a1a;">
+        <%= (@post.user&.display_name || "А").first.upcase %>
+      </div>
+    <% end %>
+    <span>
+      Автор: <strong><%= @post.user&.display_name || "Аноним" %></strong> · 
+      Опубликовано <%= @post.created_at.strftime("%d.%m.%Y") %>
+    </span>
+  </div>
+
   <% if @post.post_image.present? %>
     <%= image_tag @post.post_image.url, class: "post-image" %>
   <% end %>
 
-  <div class="post-meta">
-    Опубликовано <%= @post.created_at.strftime("%d.%m.%Y") %>
-  </div>
-
   <p class="description"><%= @post.description %></p>
 
   <div class="post-actions">
-    <% if user_signed_in? && current_user.admin? %>
+    <% if user_signed_in? && (current_user.admin? || @post.user_id == current_user.id) %>
       <%= link_to "Редактировать", edit_post_path(@post), class: "btn btn-secondary" %>
-      <%= button_to "Удалить", @post, method: :delete, class: "btn btn-danger", data: { confirm: "Точно удалить?" } %>
+    <% end %>
+    <% if user_signed_in? && current_user.admin? %>
+      <%= button_to "Удалить", @post, method: :delete, class: "btn btn-danger", data: { turbo_confirm: "Точно удалить пост?" } %>
     <% end %>
     <%= link_to "Все посты", posts_path, class: "btn btn-primary" %>
   </div>
@@ -42,12 +54,19 @@
   </div>
 
   <div class="comment-form">
-    <h3 style="margin-bottom: 16px;">Добавить комментарий:</h3>
-    <%= form_with(model: [@post, @comment]) do |form| %>
-      <div class="form-group">
-        <%= form.text_area :body, placeholder: "Напиши свой комментарий..." %>
-      </div>
-      <%= form.submit "Отправить", class: "btn btn-primary" %>
+    <% if user_signed_in? %>
+      <h3 style="margin-bottom: 16px;">Добавить комментарий:</h3>
+      <%= form_with(model: [@post, @comment]) do |form| %>
+        <div class="form-group">
+          <%= form.text_area :body, placeholder: "Напиши свой комментарий..." %>
+        </div>
+        <%= form.submit "Отправить", class: "btn btn-primary" %>
+      <% end %>
+    <% else %>
+      <p style="padding: 20px; background: #f7f7f7; border-radius: 8px; text-align: center;">
+        Чтобы оставить комментарий, <%= link_to "войдите", new_user_session_path %> 
+        или <%= link_to "зарегистрируйтесь", new_user_registration_path %>.
+      </p>
     <% end %>
   </div>
 </section>

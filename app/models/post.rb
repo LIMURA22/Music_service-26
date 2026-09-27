@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :user, optional: true
-  has_many :comments, dependent: :destroy
+  has_many :comments, -> { where(deleted_at: nil) }, dependent: :destroy
   mount_uploader :post_image, PostImageUploader
 
   STATUSES = %w[pending approved rejected].freeze

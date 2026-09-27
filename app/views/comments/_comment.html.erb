@@ -1,9 +1,14 @@
-
-
 <div class="comment" id="<%= dom_id comment %>">
   <p><%= comment.body %></p>
-  <div style="display: flex; justify-content: space-between; align-items: center;">
-    <span class="post-meta"><%= comment.created_at.strftime("%d.%m.%Y %H:%M") %></span>
-    <%= button_to "Удалить", [comment.post, comment], method: :delete, class: "btn btn-danger", style: "padding: 4px 12px; font-size: 13px;", data: { confirm: "Удалить комментарий?" } %>
+  <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+    <span class="post-meta">
+      <% if comment.user.present? %>
+        <strong><%= comment.user.display_name %></strong> · 
+      <% end %>
+      <%= comment.created_at.strftime("%d.%m.%Y %H:%M") %>
+    </span>
+    <% if user_signed_in? && (current_user.admin? || comment.user_id == current_user.id) %>
+      <%= button_to "Удалить", [comment.post, comment], method: :delete, class: "btn btn-danger", style: "padding: 4px 12px; font-size: 13px;", data: { turbo_confirm: "Вы уверены, что хотите удалить комментарий?" } %>
+    <% end %>
   </div>
 </div>
