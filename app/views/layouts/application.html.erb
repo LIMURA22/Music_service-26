@@ -15,7 +15,7 @@
         <h1 class="logo"><%= link_to "Melotoria", root_path %></h1>
         <nav class="main-nav">
          <%= link_to "Все посты", posts_path %>
-         <%= link_to "О проекте", "#" %>
+         <%= link_to "О проекте", about_path %>
           <% if user_signed_in? %>
             <% if current_user.admin? %>
               <%= link_to "Модерация", admin_posts_path %>
