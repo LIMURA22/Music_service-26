@@ -3,11 +3,11 @@ Rails.application.routes.draw do
   devise_for :users
 
   get "my_posts", to: "posts#my_posts"
-  
   get "about", to: "pages#about"
 
   resources :posts do
     resources :comments, only: [:create, :destroy]
+    resources :likes, only: [:create, :destroy]
   end
 
   namespace :admin do

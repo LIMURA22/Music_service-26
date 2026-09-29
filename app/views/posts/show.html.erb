@@ -42,6 +42,8 @@
   </div>
 </article>
 
+<%= render "likes/like_button", post: @post %>
+
 <section class="comments-section">
   <h2>Комментарии (<%= @post.comments.count %>)</h2>
 
