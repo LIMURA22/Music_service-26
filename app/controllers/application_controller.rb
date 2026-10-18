@@ -1,4 +1,9 @@
 class ApplicationController < ActionController::Base
+
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_path, alert: "Сайт в режиме предзапуска. Доступ только для команды Melotoria."
+  end
+
   before_action :store_user_location!, if: :storable_location?
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -21,18 +26,11 @@ class ApplicationController < ActionController::Base
 
   private
 
-  # Запоминаем только GET-запросы на обычные страницы (не Devise, не AJAX)
   def storable_location?
     request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
   end
 
   def store_user_location!
     store_location_for(:user, request.fullpath)
-  end
-
-  def require_admin!
-    unless current_user&.admin?
-      redirect_to root_path, alert: "Доступ только для администратора."
-    end
   end
 end

@@ -1,29 +1,34 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_post
+  before_action :set_likeable
 
   def create
-    unless @post.likes.exists?(user: current_user)
-      @post.likes.create(user: current_user)
-    end
-    respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to @post }
+    authorize! :create, Like
+    @like = @likeable.likes.build(user: current_user)
+
+    if @like.save
+      redirect_back(fallback_location: root_path, notice: "Лайк поставлен!")
+    else
+      redirect_back(fallback_location: root_path, alert: "Не удалось поставить лайк.")
     end
   end
 
   def destroy
-    like = @post.likes.find_by(user: current_user)
-    like&.destroy
-    respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to @post }
+    @like = @likeable.likes.find_by(user: current_user)
+    authorize! :destroy, @like
+    
+    if @like&.destroy
+      redirect_back(fallback_location: root_path, notice: "Лайк убран.")
     end
   end
 
   private
 
-  def set_post
-    @post = Post.find(params[:post_id])
+  def set_likeable
+    @likeable = if params[:post_id]
+                  Post.find(params[:post_id])
+                elsif params[:comment_id]
+                  Comment.find(params[:comment_id])
+                end
   end
 end
