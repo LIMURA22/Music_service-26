@@ -1,0 +1,29 @@
+<div class="promo-container" style="padding: 60px 20px; text-align: center; min-height: 100vh;">
+  <!-- HERO БЛОК -->
+  <h1 style="font-size: 64px; font-family: 'Unbounded', sans-serif; margin-bottom: 20px; color: #1a1a1a;">
+    MELOTORIA
+  </h1>
+  <h2 style="font-size: 24px; font-weight: normal; color: #666; margin-bottom: 40px;">
+    Медиасервис для музыкантов: учись, делись, находи своих.
+  </h2>
+  
+  <p style="max-width: 600px; margin: 0 auto 40px auto; font-size: 18px; line-height: 1.6;">
+    Мы устали от того, что полезные знания разбросаны по YouTube и Telegram. Мы собрали всё, что нужно музыканту, в одну систему — структурированную, красивую, русскоязычную.
+  </p>
+
+  <!-- КНОПКА ВХОДА/РЕГИСТРАЦИИ -->
+  <div style="margin-top: 40px;">
+    <%= link_to "Войти в систему", new_user_session_path, class: "btn btn-primary" %>
+    <%= link_to "Зарегистрироваться", new_user_registration_path, class: "btn btn-secondary" %>
+  </div>
+
+  <!-- БЛОК ПОДПИСКИ (из твоего макета) -->
+  <div style="margin-top: 100px; padding: 40px; background: #f8d7da; border-radius: 16px; max-width: 600px; margin-left: auto; margin-right: auto;">
+    <h3 style="font-size: 24px; margin-bottom: 10px;">Присоединяйся!</h3>
+    <p style="margin-bottom: 20px; color: #666;">Подпишись на рассылку и узнай о запуске раньше всех</p>
+    <form style="display: flex; gap: 10px; justify-content: center;">
+      <input type="email" placeholder="Твой E-mail" style="padding: 12px 20px; border: 1px solid #ccc; border-radius: 8px; width: 60%;">
+      <button type="button" style="padding: 12px 24px; background: #964ae8; color: #ffffff; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">Отправить</button>
+    </form>
+  </div>
+</div>
