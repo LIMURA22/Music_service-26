@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @collab_board %>
+
+<div>
+  <%= link_to "Edit this collab board", edit_collab_board_path(@collab_board) %> |
+  <%= link_to "Back to collab boards", collab_boards_path %>
+
+  <%= button_to "Destroy this collab board", @collab_board, method: :delete %>
+</div>

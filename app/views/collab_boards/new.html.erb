@@ -1,0 +1,11 @@
+<% content_for :title, "New collab board" %>
+
+<h1>New collab board</h1>
+
+<%= render "form", collab_board: @collab_board %>
+
+<br>
+
+<div>
+  <%= link_to "Back to collab boards", collab_boards_path %>
+</div>

@@ -5,6 +5,7 @@ gem "rails", "~> 8.1.3", ">= 8.1.3.1"
 gem "devise"
 gem "carrierwave"
 gem "cancancan"
+gem "letter_opener", group: :development
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use sqlite3 as the database for Active Record

@@ -25,5 +25,15 @@
     <%= form.file_field :post_image %>
   </div>
 
+  <div class="form-group">
+    <%= form.label :tag_ids, "Теги (можно выбрать несколько)" %>
+    <%= form.collection_select :tag_ids, Tag.order(:name), :id, :name, 
+          {}, 
+          { multiple: true, size: 5, class: "form-select" } %>
+    <small style="color: #999; display: block; margin-top: 5px;">
+      Зажми Cmd (на Mac) или Ctrl (на Windows), чтобы выбрать несколько тегов.
+    </small>
+  </div>
+
   <%= form.submit "Сохранить", class: "btn btn-primary" %>
 <% end %>

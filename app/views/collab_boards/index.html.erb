@@ -1,0 +1,37 @@
+<div class="collab-page">
+  <div class="collab-header">
+    <h1>Поиск коллабораций</h1>
+    <p>Найди музыкантов, соавторов или группу для совместного творчества</p>
+    
+    
+    <%= link_to "Создать объявление", new_collab_board_path, class: "btn-primary" %>
+  </div>
+
+  
+  <div class="search-bar">
+    <%= form_with url: collab_boards_path, method: :get, local: true, style: "display: flex; gap: 12px; width: 100%;" do |f| %>
+      <%= f.text_field :looking_for, placeholder: "Кого ищешь? (например, бас-гитариста)", value: params[:looking_for] %>
+      <%= f.text_field :city, placeholder: "Город", value: params[:city] %>
+      <!-- Кнопка "Найти" с классом btn-primary -->
+      <%= f.submit "Найти", class: "btn-primary" %>
+    <% end %>
+  </div>
+
+  <div class="collab-grid">
+    <% if @collab_boards.any? %>
+      <% @collab_boards.each do |board| %>
+        <div class="collab-card">
+          <h2><%= board.title %></h2>
+          <div class="collab-meta">Ищет: <%= board.looking_for %> | Город: <%= board.city %></div>
+          <div class="collab-desc"><%= truncate(board.description, length: 150) %></div>
+          <div class="collab-footer">
+            <span>Автор: <%= board.user&.display_name %></span>
+            <%= link_to "Откликнуться", board, class: "btn-outline" %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="empty-state">Пока нет объявлений. Будь первым!</div>
+    <% end %>
+  </div>
+</div>

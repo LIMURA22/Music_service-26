@@ -1,0 +1,47 @@
+<%= form_with(model: collab_board) do |form| %>
+  <% if collab_board.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(collab_board.errors.count, "error") %> prohibited this collab_board from being saved:</h2>
+
+      <ul>
+        <% collab_board.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.textarea :description %>
+  </div>
+
+  <div>
+    <%= form.label :looking_for, style: "display: block" %>
+    <%= form.text_field :looking_for %>
+  </div>
+
+  <div>
+    <%= form.label :city, style: "display: block" %>
+    <%= form.text_field :city %>
+  </div>
+
+  <div>
+    <%= form.label :genre, style: "display: block" %>
+    <%= form.text_field :genre %>
+  </div>
+
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

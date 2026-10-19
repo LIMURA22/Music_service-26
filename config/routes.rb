@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :collab_boards
   get "pages/about"
   devise_for :users
 

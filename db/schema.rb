@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_18_085716) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_19_075432) do
+  create_table "collab_boards", force: :cascade do |t|
+    t.string "city"
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.string "genre"
+    t.string "looking_for"
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_collab_boards_on_user_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -63,15 +75,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_18_085716) do
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.boolean "is_searchable", default: true
     t.string "name"
     t.datetime "remember_created_at"
     t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
+    t.string "telegram"
     t.datetime "updated_at", null: false
+    t.string "vk"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "collab_boards", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "likes", "posts"
