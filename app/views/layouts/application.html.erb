@@ -17,11 +17,8 @@
 
         <!-- Навигация -->
         <nav class="main-nav">
-          
           <% if user_signed_in? %>
-            
             <div class="nav-links">
-              <!-- Меню категорий (нужно будет создать контроллер categories) -->
               <%= link_to "Меню", categories_path, class: "nav-link" rescue link_to("Меню", "#", class: "nav-link") %>
               <%= link_to "Все посты", posts_path, class: "nav-link" %>
               <%= link_to "Коллаборации", collab_boards_path, class: "nav-link" %>
@@ -29,10 +26,8 @@
             </div>
 
             <div class="nav-actions">
-              <!-- Кнопка "Предложить пост" -->
               <%= link_to "Предложить пост", new_post_path, class: "btn-new" %>
 
-              
               <details class="profile-dropdown">
                 <summary class="profile-summary">
                   <% if current_user.avatar.present? %>
@@ -49,30 +44,22 @@
                     <strong><%= current_user.display_name %></strong><br>
                     <small><%= current_user.email %></small>
                   </div>
-                  
                   <hr>
-                  
                   <% if current_user.admin? %>
                     <%= link_to "Модерация постов", admin_posts_path, class: "dropdown-item" %>
                     <%= link_to "Модерация комментариев", admin_comments_path, class: "dropdown-item" %>
                   <% else %>
                     <%= link_to "Мои посты", my_posts_path, class: "dropdown-item" %>
                   <% end %>
-                  
-                  
                   <%= link_to "Уведомления", "#", class: "dropdown-item" %>
-                  
                   <%= link_to "Настройки профиля", edit_user_registration_path, class: "dropdown-item" %>
-                  
                   <hr>
-                  
                   <%= link_to "Выйти", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item text-danger" %>
                 </div>
               </details>
             </div>
 
           <% else %>
-            
             <div class="nav-links">
               <%= link_to "Промо", root_path, class: "nav-link" %>
               <%= link_to "О проекте", about_path, class: "nav-link" %>
@@ -82,12 +69,11 @@
               <%= link_to "Войти", new_user_session_path, class: "btn-login" %>
             </div>
           <% end %>
-
         </nav>
       </div>
     </header>
 
-    <main class="container main-content">
+    <main class="<%= current_page?(root_path) ? 'promo-wrapper' : 'container main-content' %>">
       <% if notice %>
         <p class="notice"><%= notice %></p>
       <% end %>
@@ -98,6 +84,7 @@
     </main>
 
     <footer class="main-footer">
+      <div class="bottom-green-line"></div>
       <div class="container">
         <p>© 2026 Melotoria — медиасервис для музыкантов</p>
       </div>

@@ -1,29 +1,151 @@
-<div class="promo-container" style="padding: 60px 20px; text-align: center; min-height: 100vh;">
-  <!-- HERO БЛОК -->
-  <h1 style="font-size: 64px; font-family: 'Unbounded', sans-serif; margin-bottom: 20px; color: #1a1a1a;">
-    MELOTORIA
-  </h1>
-  <h2 style="font-size: 24px; font-weight: normal; color: #666; margin-bottom: 40px;">
-    Медиасервис для музыкантов: учись, делись, находи своих.
-  </h2>
+<div class="promo-page">
   
-  <p style="max-width: 600px; margin: 0 auto 40px auto; font-size: 18px; line-height: 1.6;">
-    Мы устали от того, что полезные знания разбросаны по YouTube и Telegram. Мы собрали всё, что нужно музыканту, в одну систему — структурированную, красивую, русскоязычную.
-  </p>
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="hero-typography">
+      <div class="hero-top-tag font-lyajka">МЕДИАСЕРВИС</div>
+      <h1 class="hero-full-title">Melotoria</h1>
+      <div class="hero-bottom-tag font-lyajka">ДЛЯ МУЗЫКАНТОВ</div>
+    </div>
 
-  <!-- КНОПКА ВХОДА/РЕГИСТРАЦИИ -->
-  <div style="margin-top: 40px;">
-    <%= link_to "Войти в систему", new_user_session_path, class: "btn btn-primary" %>
-    <%= link_to "Зарегистрироваться", new_user_registration_path, class: "btn btn-secondary" %>
-  </div>
+    <div class="hero-footer-row">
+      <div class="hero-subtitle-text">
+        Всё, что нужно музыканту, в одном<br>
+        месте: учись, делись, находи своих
+      </div>
 
-  <!-- БЛОК ПОДПИСКИ (из твоего макета) -->
-  <div style="margin-top: 100px; padding: 40px; background: #f8d7da; border-radius: 16px; max-width: 600px; margin-left: auto; margin-right: auto;">
-    <h3 style="font-size: 24px; margin-bottom: 10px;">Присоединяйся!</h3>
-    <p style="margin-bottom: 20px; color: #666;">Подпишись на рассылку и узнай о запуске раньше всех</p>
-    <form style="display: flex; gap: 10px; justify-content: center;">
-      <input type="email" placeholder="Твой E-mail" style="padding: 12px 20px; border: 1px solid #ccc; border-radius: 8px; width: 60%;">
-      <button type="button" style="padding: 12px 24px; background: #964ae8; color: #ffffff; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">Отправить</button>
-    </form>
-  </div>
+      <div class="hero-subscribe-block">
+        <p class="subscribe-note">Подпишись на рассылку<br>и узнай о запуске раньше всех!</p>
+        <%= form_with url: "#", class: "subscription-pill" do |f| %>
+          <%= f.email_field :email, placeholder: "Твой E-mail", class: "pill-field" %>
+          <%= f.submit "Отправить", class: "pill-submit-btn" %>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY SECTION -->
+  <section class="community-section">
+    <div class="community-header">
+      <h2 class="community-title font-lyajka">
+        МЫ — ЖИВОЕ СООБЩЕСТВО,<br>
+        ОБЪЕДИНЯЮЩЕЕ МУЗЫКАНТОВ <span class="text-green">ВСЕХ УРОВНЕЙ</span>
+      </h2>
+      <div class="community-desc-wrapper">
+        <p class="community-desc">
+          Здесь каждый сможет учиться, делиться своим<br>
+          творчеством, знаниями, находить учеников, новых друзей<br>
+          и единомышленников для совместного творчества
+        </p>
+      </div>
+    </div>
+
+    <!-- КАРТОЧКИ СООБЩЕСТВА -->
+    <div class="cards-layout-grid">
+      
+      <!-- Карточка 1 (Слева) -->
+      <div class="card-box card-left-vertical">
+        <div class="card-inner-frame">
+          <div class="card-media-placeholder">
+            <span>[Изображение студии]</span>
+          </div>
+          <div class="card-user-info">
+            <div class="user-avatar-badge">АП</div>
+            <span class="user-name">Александр Папушин</span>
+          </div>
+          <h3 class="card-heading">Как свести свой вокал в Reaper</h3>
+          <p class="card-text">Разбираемся с ключевыми приёмами для сведения вокала. Подойдёт новичку</p>
+        </div>
+      </div>
+
+      <!-- Карточка 2 (По центру) -->
+      <div class="card-box card-center-flat">
+        <div class="card-user-info">
+          <div class="user-avatar-badge">ДР</div>
+          <span class="user-name">Дмитрий Романов</span>
+        </div>
+        <h3 class="card-heading">Друзья, нужен качественный фидбэк</h3>
+        <p class="card-text">Написал трек для альбома и есть ощущение, что чего-то в нём не хватает</p>
+        <div class="waveform-bars">
+          <span style="height: 35%"></span>
+          <span style="height: 65%"></span>
+          <span style="height: 95%"></span>
+          <span style="height: 45%"></span>
+          <span style="height: 80%"></span>
+          <span style="height: 25%"></span>
+          <span style="height: 85%"></span>
+          <span style="height: 55%"></span>
+          <span style="height: 35%"></span>
+          <span style="height: 75%"></span>
+          <span style="height: 25%"></span>
+        </div>
+      </div>
+
+      <!-- Карточка 3 (Справа) -->
+      <div class="card-box card-right-tilted">
+        <div class="card-horizontal-wrapper">
+          <div class="card-media-small">
+            <span>[Фото]</span>
+          </div>
+          <div class="card-body">
+            <div class="card-user-info">
+              <div class="user-avatar-badge">АМ</div>
+              <span class="user-name">Анна Музыкантская</span>
+            </div>
+            <h3 class="card-heading">Ищу гитариста в группу</h3>
+            <p class="card-text">Нужен Бог-гитарист с муз. образованием и опытом от 10 и более лет...</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Декоративный элемент гитары -->
+    <div class="guitar-bg-decor">
+      <div class="guitar-sketch-placeholder">
+        <span> [ИЗОБРАЖЕНИЕ ГИТАРЫ]</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES LADDER SECTION -->
+  <section class="features-ladder">
+    <div class="ladder-block step-left">
+      <h3 class="ladder-heading font-lyajka">ПОЛУЧАЙ <span class="text-green">ЗНАНИЯ</span></h3>
+      <p class="ladder-text">
+        Теория музыки, инструменты, продакшн.<br>
+        Всё структурировано — от новичка до профи
+      </p>
+    </div>
+
+    <div class="ladder-block step-center">
+      <h3 class="ladder-heading font-lyajka">ПОГРУЖАЙСЯ В <span class="text-green">ТВОРЧЕСТВО</span></h3>
+      <p class="ladder-text">
+        Делись своими знаниями в музыке, своими<br>
+        треками и получай обратную связь, знакомься<br>
+        с творчеством других
+      </p>
+    </div>
+
+    <div class="ladder-block step-right">
+      <h3 class="ladder-heading font-lyajka">НАХОДИ <span class="text-green">СВОИХ</span></h3>
+      <p class="ladder-text">
+        Находи единомышленников, учеников, друзей.<br>
+        Тех, с кем можно сделать коллаборацию
+      </p>
+    </div>
+  </section>
+
+  <!-- JOIN SECTION -->
+  <section class="join-callout-section">
+    <h2 class="join-main-heading font-lyajka">ПРИСОЕДИНЯЙСЯ!</h2>
+    <p class="join-subheading">Подпишись на рассылку<br>и узнай о запуске раньше всех!</p>
+    
+    <%= form_with url: "#", class: "subscription-pill pill-wide" do |f| %>
+      <%= f.email_field :email, placeholder: "Твой E-mail", class: "pill-field" %>
+      <%= f.submit "Отправить", class: "pill-submit-btn-white" %>
+    <% end %>
+  </section>
+  
+
 </div>
