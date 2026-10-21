@@ -69,4 +69,4 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem 'json', '< 3.0'
+gem 'json', '< 4.0'
