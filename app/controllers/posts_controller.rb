@@ -71,6 +71,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.expect(post: [ :title, :description, :post_image, tag_ids: [] ])
+    params.expect(post: [ :title, :description, :post_image, :category_id, tag_ids: [] ])
   end
 end

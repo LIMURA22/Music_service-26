@@ -1,20 +1,124 @@
-<div class="container" style="padding: 60px 0; max-width: 800px;">
-  <h1 style="font-size: 48px; margin-bottom: 24px;">О проекте</h1>
-  
-  <p>
-    <strong>Melotoria</strong> — это медиасервис для русскоязычных музыкантов: гитаристов, пианистов, вокалистов и продюсеров. Мы собираем в одном месте теорию музыки, лайфхаки, разборы приёмов, гайды по DAW и обратную связь по трекам.
-  </p>
+<div class="page-container grid-24">
+  <section class="hero-section">
+    <div class="hero-title-block">
+      <span class="hero-tag headline-green">МЕДИАСЕРВИС</span>
+      <h1 class="hero-main-title">Melotoria</h1>
+      <span class="hero-sub-title headline-green">ДЛЯ МУЗЫКАНТОВ</span>
+      
+      <p class="hero-desc">
+        Мы решили собрать всё, что нужно музыканту, в единую структурированную систему
+      </p>
 
+      <div class="mobile-keyboard-card">
+          <%= image_tag "keyboard1.png", alt: "Пианино" %>
+      </div>
 
-  <h2 style="font-size: 28px; margin: 40px 0 16px;">Для кого</h2>
-  <ul>
-    <li>Новички-самоучки, которые учатся играть на гитаре, пианино, петь</li>
-    <li>Практикующие музыканты, которым нужны советы по сведению и оборудованию</li>
-    <li>Преподаватели, которые хотят делиться знаниями</li>
-    <li>Продюсеры и битмейкеры, которые ищут фидбек и коллаборации</li>
-  </ul>
+      <div class="hero-subscribe-block">
+        <p class="join-subtitle">Подпишись на рассылку и узнай о запуске раньше всех!</p>
+        <form class="subscribe-form" onsubmit="event.preventDefault();">
+          <input type="email" class="subscribe-input" placeholder="Твой E-mail" required>
+          <button type="submit" class="subscribe-btn">Отправить</button>
+        </form>
+        <!-- Чекбокс согласия -->
+        <div class="consent-block">
+          <label class="consent-label">
+            <input type="checkbox" required class="consent-checkbox">
+            <span>Я согласен на обработку персональных данных</span>
+          </label>
+        </div>
+      </div>
+    </div>
 
-  <div style="margin-top: 60px; padding-top: 32px; border-top: 1px solid #eee;">
-    <%= link_to "← Вернуться к постам", posts_path, class: "btn btn-primary" %>
-  </div>
+    <div class="hero-media-block">
+      <div class="notes-placeholder"><%= image_tag "notes1.png", alt: "Ноты" %></div>
+      <div class="mic-placeholder"><%= image_tag "mic1.png", alt: "Микрофон" %></div>
+    </div>
+  </section>
+
+  <section class="section-inside">
+    <h2 class="section-inside-title headline-font">ЧТО ВНУТРИ?</h2>
+    
+    <div class="inside-grid">
+      <div class="feature-item-left">
+        <span class="feature-title headline-green-1">ТЕОРИЯ</span>
+        <p class="feature-text">Ноты, аккорды, лады, ритм, табы, история. Всё, чтобы понимать музыку</p>
+      </div>
+      <div class="feature-item-left">
+        <span class="feature-title headline-green-1">ИНСТРУМЕНТЫ</span>
+        <p class="feature-text">Гитара, пианино, вокал, барабаны, скрипка. От базовых приёмов до сложных техник</p>
+      </div>
+      <div class="feature-item-left">
+        <span class="feature-title headline-green-1">ПРОДАКШН</span>
+        <p class="feature-text">Reaper, Ableton, сведение, мастеринг, запись, оборудование. Всё про то, как сделать трек</p>
+      </div>
+
+      <div class="inside-card-right">
+        <%= image_tag "post6.png", alt: "Пост 6" %>
+      </div>
+      <div class="inside-card-left">
+        <%= image_tag "post7.png", alt: "Пост 7" %>
+      </div>
+
+      <div class="inside-card-mobile">
+        <%= image_tag "post8.png", alt: "Пост 8" %>
+      </div>
+
+      <div class="right-column-wrapper">
+        <div class="feature-item-right">
+          <span class="feature-title headline-green-1">ТРЕКИ</span>
+          <p class="feature-text">Загружай свои работы, получай фидбек, слушай других</p>
+        </div>
+        <div class="feature-item-right">
+          <span class="feature-title headline-green-1">СООБЩЕСТВО</span>
+          <p class="feature-text">Находи коллаборации, вступай в группы, общайся с музыкантами из своего города</p>
+        </div>
+        <div class="feature-item-right">
+          <span class="feature-title headline-green-1">ИНДУСТРИЯ</span>
+          <p class="feature-text">Как выпустить трек, получить роялти, найти лейбл. Всё, что происходит в индустрии</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="keyboard-placeholder"><%= image_tag "keyboard1.png", alt: "Пианино" %></div>
+  </section>
+
+  <section class="section-audience">
+    <h2 class="section-audience-title headline-font">ДЛЯ КОГО?</h2>
+    <div class="audience-cols">
+      <div class="audience-card">
+        <div class="person-photo-placeholder"><%= image_tag "person_1_1.png", alt: "Ца 1" %></div>
+        <h3 class="audience-card-title headline-green">НОВИЧОК-САМОУЧКА</h3>
+        <p class="audience-card-desc">Только начинаешь свой путь и хочешь последовательно учиться.</p>
+      </div>
+      <div class="audience-card">
+        <div class="person-photo-placeholder"><%= image_tag "person_2_1.png", alt: "Ца 2" %></div>
+        <h3 class="audience-card-title headline-green">ПРАКТИКУЮЩИЙ</h3>
+        <p class="audience-card-desc">Уже играешь, поёшь, но хочешь расти. Ищешь советы и фидбэк.</p>
+      </div>
+      <div class="audience-card">
+        <div class="person-photo-placeholder"><%= image_tag "person_3_1.png", alt: "Ца 3" %></div>
+        <h3 class="audience-card-title headline-green">ПРЕПОДАВАТЕЛЬ</h3>
+        <p class="audience-card-desc">Хочешь делиться знаниями, набирать учеников, быть частью сообщества.</p>
+      </div>
+    </div>
+  </section>
+</div> 
+
+<div class="page-container">
+  <section class="promo-join-footer">
+    <h2 class="font-headline join-big-title">ПРИСОЕДИНЯЙСЯ!</h2>
+    <p class="join-subtitle">Подпишись на рассылку и узнай о запуске раньше всех!</p>
+    
+    <form class="subscribe-form" onsubmit="event.preventDefault();">
+      <input type="email" class="subscribe-input" placeholder="Твой E-mail" required>
+      <button type="submit" class="subscribe-btn-white">Отправить</button>
+    </form>
+    <!-- Чекбокс согласия -->
+    <div class="consent-block">
+      <label class="consent-label">
+        <input type="checkbox" required class="consent-checkbox">
+        <span>Я согласен на обработку персональных данных</span>
+      </label>
+    </div>
+  </section>
 </div>

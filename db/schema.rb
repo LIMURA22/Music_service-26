@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_19_075432) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_28_003939) do
+  create_table "categories", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.integer "parent_id"
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_categories_on_parent_id"
+  end
+
   create_table "collab_boards", force: :cascade do |t|
     t.string "city"
     t.datetime "created_at", null: false
@@ -53,6 +61,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_19_075432) do
   end
 
   create_table "posts", force: :cascade do |t|
+    t.integer "category_id"
     t.datetime "created_at", null: false
     t.text "description"
     t.string "post_image"
@@ -60,6 +69,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_19_075432) do
     t.string "title"
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -87,6 +97,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_19_075432) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "categories", "categories", column: "parent_id"
   add_foreign_key "collab_boards", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
@@ -94,5 +105,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_19_075432) do
   add_foreign_key "likes", "users"
   add_foreign_key "post_tags", "posts"
   add_foreign_key "post_tags", "tags"
+  add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"
 end

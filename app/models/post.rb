@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :user, optional: true
+  belongs_to :category, optional: true
   has_many :comments, -> { where(deleted_at: nil) }, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :post_tags, dependent: :destroy

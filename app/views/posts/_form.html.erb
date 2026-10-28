@@ -35,5 +35,10 @@
     </small>
   </div>
 
+  <div class="form-group">
+    <%= form.label :category_id, "Категория" %>
+    <%= form.collection_select :category_id, Category.all, :id, :name, { include_blank: "Выберите категорию" }, class: "form-select" %>
+  </div>
+
   <%= form.submit "Сохранить", class: "btn btn-primary" %>
 <% end %>

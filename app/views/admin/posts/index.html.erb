@@ -33,7 +33,7 @@
       <% @approved_posts.each do |post| %>
         <div style="padding: 12px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
           <div>
-            <%= link_to post.title, post, style: "color: #1a1a1a; text-decoration: none; font-weight: 600;" %>
+            <%= link_to post.title, post, style: "color: #aaaaaa; text-decoration: none; font-weight: 600;" %>
             <span class="post-meta"> · <%= post.user&.email || "Аноним" %></span>
           </div>
           <%= button_to "Отклонить", reject_admin_post_path(post), method: :patch, class: "btn btn-danger", style: "padding: 6px 12px; font-size: 13px;" %>
